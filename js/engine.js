@@ -84,9 +84,10 @@ var Engine = (function(global) {
 
     function checkCollisions(){
         allEnemies.forEach(function(enemy){
-            if(player.x === enemy.x && player.y === enemy.y){
+            if(player.x > Math.ceil(enemy.x)-50 && player.x < Math.ceil(enemy.x)+60
+                     && player.y === enemy.y){
                 player.x = 202;
-                player.y = 403; 
+                player.y = 391; 
             }
         });
     }

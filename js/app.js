@@ -12,16 +12,19 @@ var Enemy = function(x, y, xDir) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype = {
+	update : function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + dt* this.xDir;
-    if(this.x  > 700){
-    	this.x =-201;
-    }
-};
+    	if(this.x  > 700){
+    		this.x =-201;
+    	}
+  
+	},
 
+}
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -32,7 +35,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function(){
 	this.x = 202;
-	this.y = 59;
+	this.y = 391;
 	this.yDir = 83;
 	this.xDir = 101;
 	this.sprite = "images/char-boy.png"
@@ -40,7 +43,8 @@ var Player = function(){
 
 Player.prototype = {
 	update : function(){
-		this.handleInput();	
+		this.handleInput();
+		this.showLocation();
 	},
 	render : function(){
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -55,20 +59,24 @@ Player.prototype = {
 		}else if(keyCode === "right"){
 			this.x += this.xDir;
 		}	
+		this.checkBorder();
 	},
 	checkBorder : function(){
-		if(this.y === 0 || this.x === 0 || this.x === 505 || this.y === 606){
+		if(this.y < -24 || this.x < 0 || this.x > 404 || this.y >391){
 			alert("out");
 		}
+	},
+	showLocation : function(){
+		console.log("X : "+this.x + "  Y : " + this.y);
 	}
-
 }
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var allEnemies = [new Enemy(-201, 225, 110), new Enemy(-201, 142, 50), new Enemy(-202, 59, 50)];
+var allEnemies = [new Enemy(-201, 225, 110), new Enemy(-201, 142, 50),new Enemy(-403, 142, 50),
+ new Enemy(-202, 59, 200)];
 var player = new Player();
 
 
