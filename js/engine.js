@@ -27,9 +27,7 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
-    var allEnemies = [new Enemy(101, 249, 110, 110)];
-    /* This function serves as the kickoff point for the game loop itself
+    doc.body.appendChild(canvas);    /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
     function main() {
@@ -81,7 +79,16 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    function checkCollisions(){
+        allEnemies.forEach(function(enemy){
+            if(player.x === enemy.x && player.y === enemy.y){
+                player.x = 202;
+                player.y = 403; 
+            }
+        });
     }
 
     /* This is called by the update function  and loops through all of the
@@ -138,7 +145,7 @@ var Engine = (function(global) {
         }
 
 
-        renderEntities();
+        renderEntities(ctx);
     }
 
     /* This function is called by the render function and is called on each game

@@ -1,10 +1,10 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, xDir, yDir) {
+var Enemy = function(x, y, xDir) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
-    this.yDir  = xDir;
+    this.xDir  = xDir;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -17,6 +17,9 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + dt* this.xDir;
+    if(this.x  > 700){
+    	this.x =-201;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -28,28 +31,35 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(){
+	this.x = 202;
+	this.y = 59;
+	this.yDir = 83;
 	this.xDir = 101;
-	this.yDir = 68;
-	this.sprite = "images/enemy-char-boy.png"
+	this.sprite = "images/char-boy.png"
 }
 
 Player.prototype = {
 	update : function(){
-
+		this.handleInput();	
 	},
 	render : function(){
-
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	},
 	handleInput : function(keyCode){
-		if(keyCode === 'up'){
+		if(keyCode === 'down'){
 			this.y += this.yDir;
 		}else if(keyCode === "left"){
 			this.x -= this.xDir;
-		}else if(keyCode === "down"){
+		}else if(keyCode === "up"){
 			this.y -= this.yDir;
 		}else if(keyCode === "right"){
 			this.x += this.xDir;
 		}	
+	},
+	checkBorder : function(){
+		if(this.y === 0 || this.x === 0 || this.x === 505 || this.y === 606){
+			alert("out");
+		}
 	}
 
 }
@@ -58,6 +68,7 @@ Player.prototype = {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
+var allEnemies = [new Enemy(-201, 225, 110), new Enemy(-201, 142, 50), new Enemy(-202, 59, 50)];
 var player = new Player();
 
 
