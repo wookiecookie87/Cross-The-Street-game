@@ -80,6 +80,7 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        checkFinish();
     }
 
     function checkCollisions(){
@@ -91,6 +92,14 @@ var Engine = (function(global) {
             }
         });
     }
+
+    function checkFinish(){
+        if(player.y == -24){
+            player.x = 202;
+            player.y = 391;
+        }
+    }
+
 
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -161,9 +170,6 @@ var Engine = (function(global) {
             enemy.render();
         });
 
-        allJeweries.forEach(function(jewelry){
-            jewelry.render();
-        })
 
         player.render();
     }

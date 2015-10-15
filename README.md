@@ -1,6 +1,7 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
 
-for self-checking their submission.
+To Run the game, Open 'index.html' in browser.
+
+Goal of the game: You need to the reach the river without touching or colliding into bugs running around.

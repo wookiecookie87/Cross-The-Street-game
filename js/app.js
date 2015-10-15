@@ -33,6 +33,7 @@ var Player = function(){
 Player.prototype = {
 	update : function(){
 		this.handleInput();
+		console.log(this.x + " " +this.y);
 	},
 	render : function(){
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -62,36 +63,8 @@ Player.prototype = {
 	}
 }
 
-
-var Jewelry = function(){
-	this.x = Math.floor(Math.random()*5) * 101;
-	this.y = Math.floor(Math.random()*4) * 83;
-
-	var rand = Math.floor(Math.random()*3)+1;
-	var sprite = "";
-	if(rand == 1){
-		sprite = 'images/Gem-Blue.png';
-	}else if(rand == 2){
-		sprite = 'images/Gem-Green.png';
-	}else if(rand == 3){
-		sprite = 'images/Gem-Orange.png';
-	}
-	this.sprite = sprite;
-
-}
-
-Jewelry.prototype ={
-	render : function(){
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 60, 60);
-	}
-}
-
 var allEnemies = [new Enemy(-201, 225, 110), new Enemy(-201, 142, 50),new Enemy(-403, 142, 50), new Enemy(-202, 59, 200)];
 var player = new Player();
-var allJeweries = [];
-for(var i = 0; i < 5; i++){
-	allJeweries.push(new Jewelry());
-}
 
 
 document.addEventListener('keyup', function(e) {
