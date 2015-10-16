@@ -23,20 +23,17 @@ Enemy.prototype = {
 // Draw the enemy on the screen, required method for game
 
 var Player = function(){
-	this.x = 202;
-	this.y = 391;
+	Enemy.call(this, 202, 391, 101);
 	this.yDir = 83;
-	this.xDir = 101;
 	this.sprite = "images/char-boy.png"
 }
+
+Player.prototype = Object.create(Enemy.prototype);
 
 Player.prototype = {
 	update : function(){
 		this.handleInput();
 		console.log(this.x + " " +this.y);
-	},
-	render : function(){
-		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	},
 	handleInput : function(keyCode){
 		if(keyCode === 'down'){
