@@ -19,23 +19,23 @@ Enemy.prototype = {
 	}
 
 
-}
+};
 // Draw the enemy on the screen, required method for game
 
 var Player = function(){
 	Enemy.call(this, 202, 391, 101);
 	this.yDir = 83;
 	this.sprite = "images/char-boy.png"
-}
+};
 
 Player.prototype = Object.create(Enemy.prototype);
-
-Player.prototype = {
-	update : function(){
+Player.prototype.constructor = Player;
+Player.prototype.update = function(){
 		this.handleInput();
 		console.log(this.x + " " +this.y);
-	},
-	handleInput : function(keyCode){
+}
+
+Player.prototype.handleInput = function(keyCode){
 		if(keyCode === 'down'){
 			this.y += this.yDir;
 		}else if(keyCode === "left"){
@@ -46,8 +46,9 @@ Player.prototype = {
 			this.x += this.xDir;
 		}	
 		this.checkBorder();
-	},
-	checkBorder : function(){
+}
+
+Player.prototype.checkBorder = function(){
 		if(this.y < -24){
 			this.y += 83;
 		}else if(this.x < 0){
@@ -57,7 +58,6 @@ Player.prototype = {
 		}else if(this.y > 391){
 			this.y -= 83;
 		}
-	}
 }
 
 var allEnemies = [new Enemy(-201, 225, 110), new Enemy(-201, 142, 50),new Enemy(-403, 142, 50), new Enemy(-202, 59, 200)];
@@ -74,3 +74,23 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+
+ function checkCollisions(){
+        allEnemies.forEach(function(enemy){
+            if(player.x > Math.ceil(enemy.x)-50 && player.x < Math.ceil(enemy.x)+60
+                     && player.y === enemy.y){
+                player.x = 202;
+                player.y = 391; 
+            }
+        });
+    }
+
+   
+function checkFinish(){
+    if(player.y == -24){
+        player.x = 202;
+        player.y = 391;
+    }
+} 
