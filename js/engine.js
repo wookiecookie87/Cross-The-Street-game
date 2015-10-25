@@ -148,17 +148,21 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });
-
-
-        player.render();
-
         allJewelries.forEach(function(jewelry) {
             jewelry.render();
            // console.log("render   x  "+jewelry.x+" y "+ jewelry.y);
         });
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
+        var x = gameComps.getxPosition(4);
+        var y = gameComps.getyPosition(0);
+
+        ctx.drawImage(Resources.get('images/enemy-bug.png'), x, y);
+
+
+        player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to

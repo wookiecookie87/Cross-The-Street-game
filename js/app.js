@@ -66,8 +66,9 @@ var Jewelry = function(x, y, sprite){
 	this.sprite = sprite;
 }
 
-Jewelry.prototype = Object.create(Enemy.prototype);
-Jewelry.prototype.constructor = Jewelry;
+Jewelry.prototype.render = function(){
+	ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 50, 50);
+}
 
 
 var allEnemies = [new Enemy(gameComps.getxPosition(-2), gameComps.getyPosition(2), 100), 
