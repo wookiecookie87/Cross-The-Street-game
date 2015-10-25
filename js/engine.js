@@ -79,27 +79,9 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
-        checkFinish();
+        gameComps.checkCollisions(player, allEnemies);
+        gameComps.checkFinish(player);
     }
-
-    function checkCollisions(){
-        allEnemies.forEach(function(enemy){
-            if(player.x > Math.ceil(enemy.x)-50 && player.x < Math.ceil(enemy.x)+60
-                     && player.y === enemy.y){
-                player.x = 202;
-                player.y = 391; 
-            }
-        });
-    }
-
-    function checkFinish(){
-        if(player.y == -24){
-            player.x = 202;
-            player.y = 391;
-        }
-    }
-
 
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -172,6 +154,11 @@ var Engine = (function(global) {
 
 
         player.render();
+
+        allJewelries.forEach(function(jewelry) {
+            jewelry.render();
+           // console.log("render   x  "+jewelry.x+" y "+ jewelry.y);
+        });
     }
 
     /* This function does nothing but it could have been a good place to
