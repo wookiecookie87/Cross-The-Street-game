@@ -79,27 +79,9 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
-        checkFinish();
+        gameComps.checkCollisions(player, allEnemies);
+        gameComps.checkFinish(player);
     }
-
-    function checkCollisions(){
-        allEnemies.forEach(function(enemy){ 
-            if(player.x > Math.ceil(enemy.x)-50 && player.x < Math.ceil(enemy.x)+60
-                     && player.y === enemy.y){
-                player.x = 202;
-                player.y = 391; 
-            }
-        });
-    }
-
-    function checkFinish(){
-        if(player.y == -24){
-            player.x = 202;
-            player.y = 391;
-        }
-    }
-
 
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -166,12 +148,21 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        allJewelries.forEach(function(jewelry) {
+            jewelry.render();
+           // console.log("render   x  "+jewelry.x+" y "+ jewelry.y);
+        });
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
+        var x = gameComps.getxPosition(4);
+        var y = gameComps.getyPosition(0);
+
+        ctx.drawImage(Resources.get('images/enemy-bug.png'), x, y);
 
 
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to
